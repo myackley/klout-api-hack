@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Klout Score Comparison</title>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -11,7 +12,38 @@
 </head>
 <body>
 
-	
+	<header>
+		<h1>Klout Score Comparison</h1>
+	</header>
+
+	<div class="kloutapp-results">
+		<p class="lead">Enter a competitor Twitter handle without an "@" symbol in each text field to compare Klout Scores.</p>
+
+	</div>
+
+	<div class="template">
+		<div class="result-empty">
+			<div class="result-empty-enterhandle">
+				<label for="result-field">@</label>
+				<input id="result-field" type="text" placeholder="Enter handle">
+				<button type="button">Add</button>
+			</div>
+		</div>
+		<div class="result-entered">
+			<div class="result-entered-handle">
+				<p></p>
+				<div class="close-btn">
+					<a href="">X</a>
+				</div>
+			</div>
+			<div class="result-entered-body">
+				<div class="result-score">
+				</div>
+				<div class="result-topics">
+				</div>
+			</div>
+		</div>
+	</div>
 	
 </body>
 </html>
