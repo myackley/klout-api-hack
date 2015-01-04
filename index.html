@@ -14,44 +14,90 @@
 
 	<div class="kloutapp">
 
-		<header>
+		<div class="header">
 			<h1>Klout Score Comparison</h1>
-		</header>
+			<p class="lead">Enter a competitor Twitter handle without an "@" symbol in each text field to compare Klout Scores.</p>
+			<div class="error-messages">
+				<p>This is an error</p>
+			</div>
+		</div>
 
 		<div class="kloutapp-results">
-			<p class="lead">Enter a competitor Twitter handle without an "@" symbol in each text field to compare Klout Scores.</p>
+
+			<div class="results-empty">
+				<div class="results-header">
+					<label for="results-field">@</label>
+					<input id="results-field" type="text" placeholder="Enter handle">
+					<button type="button">Add</button>
+				</div>
+			</div>
+
+			<div class="results-entered">
+				<div class="results-header">
+					<p>
+						@SteveMartinToGo
+					</p>
+					<div class="close-btn">
+						<a href="">&times;</a>
+					</div>
+				</div>
+				<div class="results-body">
+					<div class="results-score">
+						<div>
+							<p>
+								87
+							</p>
+						</div>
+					</div>
+					<div class="results-topics">
+						<ul>
+							<li><p>Influential Topic</p></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
 		</div>
 
 		<div class="template">
-			<div class="result-empty">
-				<div class="result-empty-enterhandle">
-					<label for="result-field">@</label>
-					<input id="result-field" type="text" placeholder="Enter handle">
+			<div class="results-empty">
+				<div class="results-header">
+					<label for="results-field">@</label>
+					<input id="results-field" type="text" placeholder="Enter handle">
 					<button type="button">Add</button>
 				</div>
 			</div>
-			<div class="result-entered">
-				<div class="result-entered-handle">
-					<p></p>
+			<div class="results-entered">
+				<div class="results-header">
+					<p>
+						<!-- @SteveMartinToGo -->
+					</p>
 					<div class="close-btn">
-						<a href="">X</a>
+						<a href="">&times;</a>
 					</div>
 				</div>
-				<div class="result-entered-body">
-					<div class="result-score">
+				<div class="results-body">
+					<div class="results-score">
+						<div>
+							<p>
+								<!-- 87 -->
+							</p>
+						</div>
 					</div>
-					<div class="result-topics">
+					<div class="results-topics">
+						<ul>
+							<!-- <li><p>Influential Topic</p></li> -->
+						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 
-	</div>
+		<div class="footer">
+			<a href="http://www.klout.com" target="_blank"><img src="img/powered-by-klout.jpg" alt="Powered by Klout"></img></a>
+		</div>
 
-	<footer>
-		<a href="http://www.klout.com" target="_blank"><img src="img/powered-by-klout.jpg" alt="Powered by Klout"></img></a>
-	</footer>
+	</div>
 	
 </body>
 </html>
