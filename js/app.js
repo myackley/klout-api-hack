@@ -32,13 +32,38 @@ $(function() {
 		// get user & load into layout
 		getUser(handle);
 		// get score & load into layout
-		console.log("get score");		
+		//console.log("get score");		
 		// get topics & load into layout
-		console.log("get topics");
+		//console.log("get topics");
 	};
 
 	var getUser = function(handle) {
-		console.log("get user"+handle);
+		var request = {
+			screenName:handle,
+			key:apiKey
+		};
+
+		var result = $.ajax({
+			url: "http://api.klout.com/v2/identity.json/twitter/",
+			data: request,
+			dataType: "jsonp",
+			type: "GET",
+		})
+		.success(function(result){
+
+			$(".error-messages").hide().find("p").text("");
+			console.log(result.id);
+
+		})
+		.error(function(jqXHR, error, errorThrown){
+			console.log(jqXHR.readyState);
+			console.log(jqXHR.status);
+			console.log(jqXHR.responseText);
+			console.log(error);
+			console.log(errorThrown);
+			// var errorElem = showError(error);
+			// $(".error-messages").show().find("p").append(errorElem);
+		});
 	};
 
 });
