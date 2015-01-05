@@ -110,17 +110,19 @@ button:focus {
 	background: url(../img/vs-separater.png) 50% 20% transparent no-repeat;
 	min-height: 435px;
 }
-.kloutapp-results > div {
+.kloutapp-results .results-box {
 	float: left;
 	width: 40%;
+}
+.kloutapp-results .results-box:first-child {
+	margin-right: 20%;
+}
+.results-box > div {
 	border-width: 1px;
 	border-style: solid;
 	padding: .4em;
 	text-align: center;
-	min-height: 386px;
-}
-.kloutapp-results > div:first-child {
-	margin-right: 20%;
+	min-height: 386px;	
 }
 .kloutapp-results .results-header {
 	padding: 8px;
