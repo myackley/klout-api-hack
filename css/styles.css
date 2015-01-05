@@ -135,6 +135,7 @@ button:focus {
 .kloutapp-results .results-header > p {
 	display: inline-block;
 	padding: 2px;
+	font-weight: 800;
 }
 .kloutapp-results .results-header > div a {
 	display: block;
@@ -174,6 +175,7 @@ button:focus {
 
 .results-topics li {
 	position: relative;
+	margin-bottom: .5em;
 }
 .results-topics li:after, 
 .results-topics li:before {

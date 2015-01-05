@@ -4,6 +4,7 @@ $(function() {
 	var resultsArea = $(".kloutapp-results"); // get results area
 	var kloutId = "";
 	var current = "";
+	var firstScore,secondScore;
 
 	// display 'empty' layouts
 	var loadDefaultLayouts = function() {
@@ -67,6 +68,7 @@ $(function() {
 
 				getScore(current,kloutId);
 				getTopics(current,kloutId);
+
 			},
 			error: function() {
 				$(".error-messages").show().find("p").append("User does not exist. Try another username.");
@@ -84,21 +86,35 @@ $(function() {
 			dataType: "jsonp",
 			type: "GET",
 			success: function(result) {
-				current.find(".results-score div p").text(Math.round(result.score));	
+				current.find(".results-score div p").text(Math.round(result.score));
+			},
+			error: function() {
+				$(".error-messages").show().find("p").append("User does not exist. Try another username.");
+			}
+		});
+};
+
+
+
+var getTopics = function(current,kloutId) {
+		// get topics & load into layout
+		$.ajax({
+			url: "http://api.klout.com/v2/user.json/"+kloutId+"/topics",
+			data: {key:apiKey},
+			dataType: "jsonp",
+			type: "GET",
+			success: function(result) {
+				var resultsStr = "";
+				$.each(result, function(i,value) {
+					resultsStr = resultsStr+"<li>"+value.displayName+"</li>";
+				});
+				current.find(".results-topics ul").append(resultsStr);
 			},
 			error: function() {
 				$(".error-messages").show().find("p").append("User does not exist. Try another username.");
 			}
 		});
 	};
-
-
-	// get topics & load into layout
-	var getTopics = function(current,kloutId) {
-		console.log("get topics");
-		
-	}
-
 
 
 });
