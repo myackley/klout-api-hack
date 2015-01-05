@@ -106,7 +106,11 @@ var getTopics = function(current,kloutId) {
 			success: function(result) {
 				var resultsStr = "";
 				$.each(result, function(i,value) {
-					resultsStr = resultsStr+"<li>"+value.displayName+"</li>";
+					if (i < 5) {
+						resultsStr = resultsStr+"<li>"+value.displayName+"</li>";
+					} else {
+						return false;
+					}
 				});
 				current.find(".results-topics ul").append(resultsStr);
 			},
