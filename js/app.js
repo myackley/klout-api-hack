@@ -3,6 +3,7 @@ $(function() {
 	var apiKey = "gctmf4efq2wpj5c5q5z5hsca";
 	var resultsArea = $(".kloutapp-results"); // get results area
 	var kloutId = "";
+	var current = "";
 
 	// display 'empty' layouts
 	var loadDefaultLayouts = function() {
@@ -28,8 +29,12 @@ $(function() {
 		displayData(current,twHandle);
 	});
 
-	$(".close-btn").on("click",function() {
+	$(".results-box").on("click",".close-btn",function(event) {
+		event.preventDefault();
 		// remove user and default back to 'empty' layout
+		var current = $(this).parents(".results-box");
+		var emptyLayout = $(".template .results-empty").clone()
+		current.empty().append(emptyLayout);
 	});
 
 
@@ -40,37 +45,32 @@ $(function() {
 
 	var displayData = function(current,handle) {
 		// get user & load into layout
-		var request = {
-			screenName:handle,
-			key:apiKey
-		};
 
-		var result = $.ajax({
+		$.ajax({
 			url: "http://api.klout.com/v2/identity.json/twitter/",
-			data: request,
+			data: {screenName:handle,key:apiKey},
 			dataType: "jsonp",
 			type: "GET",
-		})
-		.done(function(result){
-			var kloutId = result.id;
-			// clear error message... $(".error-messages").hide().find("p").text("");
-			
-			current.empty();
-			var enteredLayout = $(".template .results-entered").clone();
+			success: function(result) {
+				var kloutId = result.id;
+				// clear error messages
+				$(".error-messages").find("p").text("").hide();
+				// empty the 'box'
+				current.empty();
+				var enteredLayout = $(".template .results-entered").clone();
+				// load up the handle
+				var handleHref = enteredLayout.find(".results-header p > a");
+				var handleName = enteredLayout.find(".results-header p");
+				handleName.attr("href","http://www.klout.com/"+kloutId);
+				handleName.text("@"+handle);
+				current.append(enteredLayout);
 
-			var handleHref = enteredLayout.find(".results-header p > a");
-			var handleName = enteredLayout.find(".results-header p");
-			handleName.attr("href","http://www.klout.com/"+kloutId);
-			handleName.text("@"+handle);
-
-			current.append(enteredLayout);
-
-			getScore(current,kloutId);
-
-		})
-		.fail(function(jqXHR, error, errorThrown){
-
-			// $(".error-messages").show().find("p").append(errorElem);
+				getScore(current,kloutId);
+				getTopics(current,kloutId);
+			},
+			error: function() {
+				$(".error-messages").show().find("p").append("User does not exist. Try another username.");
+			}
 		});
 	};
 
@@ -78,15 +78,26 @@ $(function() {
 
 	var getScore = function(current,kloutId) {
 		// get score & load into layout
-		console.log("get score");
-		console.log(current);
-		console.log(kloutId);
+		$.ajax({
+			url: "http://api.klout.com/v2/user.json/"+kloutId+"/score",
+			data: {key:apiKey},
+			dataType: "jsonp",
+			type: "GET",
+			success: function(result) {
+				current.find(".results-score div p").text(Math.round(result.score));	
+			},
+			error: function() {
+				$(".error-messages").show().find("p").append("User does not exist. Try another username.");
+			}
+		});
 	};
 
 
-
 	// get topics & load into layout
-	//console.log("get topics");
+	var getTopics = function(current,kloutId) {
+		console.log("get topics");
+		
+	}
 
 
 
